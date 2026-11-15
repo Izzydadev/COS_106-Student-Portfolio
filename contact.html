@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Ifeanyi Chima Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Ifeanyi Chima</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="planner.html">Academic Planner</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Get in Touch</h2>
+            <p>Send me a message using the form below:</p>
+
+            <form id="contactForm" novalidate>
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your full name">
+                <span id="nameError" class="error-message"></span>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="your.email@example.com">
+                <span id="emailError" class="error-message"></span>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" placeholder="08012345678">
+                <span id="phoneError" class="error-message"></span>
+
+                <label for="message">Message</label>
+                <textarea id="message" rows="4" placeholder="Your message..."></textarea>
+                <span id="messageError" class="error-message"></span>
+
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="successMsg" style="color: var(--success); font-weight: 600; margin-top: 1rem;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ifeanyi Chima. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+            document.getElementById('messageError').textContent = '';
+            document.getElementById('successMsg').textContent = '';
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            let isValid = true;
+
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'Name cannot be empty.';
+                isValid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                document.getElementById('emailError').textContent = 'Email cannot be empty.';
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email format.';
+                isValid = false;
+            }
+
+            const phoneRegex = /^\d+$/;
+            if (phone === '') {
+                document.getElementById('phoneError').textContent = 'Phone number cannot be empty.';
+                isValid = false;
+            } else if (!phoneRegex.test(phone)) {
+                document.getElementById('phoneError').textContent = 'Phone number must contain digits only.';
+                isValid = false;
+            }
+
+            if (message === '') {
+                document.getElementById('messageError').textContent = 'Message cannot be empty.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                document.getElementById('successMsg').textContent = 'Thank you! Your message has been successfully validated and sent.';
+                document.getElementById('contactForm').reset();
+            }
+        });
+    </script>
+</body>
+</html>
